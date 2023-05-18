@@ -55,6 +55,11 @@ function EditNote(event){
         alert("All fields are mandatory.");
         event.preventDefault();   
     }
+    else if(document.getElementById("ex").value!=='NULL' && document.getElementById("ex").value<0 && document.getElementById("ex").value>20
+    || document.getElementById("ds").value!=='NULL'&& document.getElementById("ds").value<0 && document.getElementById("ds").value>20)  {
+        alert("Please enter a valid grade.");
+        event.preventDefault();
+    }
 }
 function isValidEmail(email) {
     const emailRegex = /\S+@\S+\.\S+/;

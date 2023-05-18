@@ -19,17 +19,13 @@ if (isset($_POST['submit'])) {
     $id_matiere = $_POST['id_matiere'];
     $ex = $_POST['ex'];
     $ds = $_POST['ds'];
-    $updatequery = "UPDATE etudiant_inscrit SET note_examen = :ex, note_ds = :ds WHERE id = :id";
-    $stmt = $conn->prepare($updatequery);
-    $stmt->bindValue(':ex', $ex);
-    $stmt->bindValue(':ds', $ds);
-    $stmt->bindValue(':id', $id);
-    $result = $stmt->execute();
-    if ($result) {
+    $updatequery = "UPDATE etudiant_inscrit SET note_examen = $ex, note_ds = $ds WHERE id = $id";
+    $stmt = $conn->query($updatequery);
+    if ($stmt) {
         header("location:view.php?id=$id_matiere");
         die();
     } else {
-        header("location:view.php?id=$id_matiere");
+        ("location:view.php?id=$id_matiere");
         die();
     }
 }
@@ -48,7 +44,7 @@ $conn = null;
     <!-- Note Examen input -->
     <div class="form-outline">
         <label class="form-label" for="ex">Note Examen</label>
-        <input type="text" id="ex" name="ex" value="<?php echo $row['note_examen']; ?>" class="form-control"/>
+        <input type="text" id="ex" name="ex" value="<?php echo $row['note_examen'];?>" class="form-control"/>
     </div>
     <!-- Note DS input -->
     <div class="form-outline">
