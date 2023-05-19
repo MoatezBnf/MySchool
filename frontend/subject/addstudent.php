@@ -24,6 +24,13 @@ if(isset($_POST['submit'])){
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     $teacherid = $_SESSION['id'];
     if($row){
+        $verifemail="SELECT * FROM etudiant_inscrit WHERE email ='$email' AND id_matiere=$id";
+        $verifemailresult=$conn->query($verifemail);
+        $verifemailrow=$verifemailresult->fetch(PDO::FETCH_ASSOC);
+        if($verifemailrow){
+            header("location:addstudenterror2.php?id=$id");
+            die();
+        }
         $id_etudiant = $row['id'];
         $lastname = $row['nom'];
         $name = $row['prenom'];

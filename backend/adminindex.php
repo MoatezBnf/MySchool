@@ -15,18 +15,15 @@ if (!isset($_SESSION['user']) || $_SESSION['user'] != 'admin') {
 echo "<strong class='text-center'>Membre Connecté: " . $_SESSION['user'] . "</strong>";
 require_once("../includes/connect.php");
 $conn = connect();
-
 $search = "";
 if (isset($_GET['search'])) {
     $search = $_GET['search'];
 }
-
 $teacherquery = "SELECT * FROM user WHERE role = 1 AND (nom LIKE :search OR prenom LIKE :search)";
 $teacherstmt = $conn->prepare($teacherquery);
 $teacherstmt->bindValue(':search', '%' . $search . '%');
 $teacherstmt->execute();
 $teacherresult = $teacherstmt->fetchAll(PDO::FETCH_ASSOC);
-
 if (count($teacherresult) > 0) {
     echo "<div class='container-fluid'>
     <h6>List of Teachers:<h6>

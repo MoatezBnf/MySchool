@@ -12,12 +12,10 @@ try {
     $pass = $_POST['loginPassword'];
     require_once("../includes/connect.php");
     $conn = connect();
-    
     $query = "select * from user where user = :user";
     $stmt = $conn->prepare($query);
     $stmt->bindParam(':user', $user);
     $stmt->execute();
-    
     $ligne = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($ligne) {
         if ($ligne['user'] == "admin" && $pass == "myschooladmin") {
